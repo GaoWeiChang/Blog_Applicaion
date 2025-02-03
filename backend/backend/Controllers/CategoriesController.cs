@@ -3,6 +3,7 @@ using backend.Models.Dto;
 using backend.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using System.ComponentModel;
 
 namespace backend.Controllers
 {
@@ -19,7 +20,7 @@ namespace backend.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        // POST : http://localhost:7188/api/Categories
+        // POST : https://localhost:7188/api/Categories
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
         {
@@ -43,7 +44,7 @@ namespace backend.Controllers
             return Ok(response);
         }
 
-        // GET : http://localhost:7188/api/Categories
+        // GET : https://localhost:7188/api/Categories
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
@@ -60,6 +61,72 @@ namespace backend.Controllers
                     UrlHandle = category.UrlHandle,
                 });
             }
+
+            return Ok(response);
+        }
+
+        // GET : https://localhost:7188/api/Categories/{id}
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetCategorybyId(Guid id)
+        {
+            var existingCategory = await categoryRepository.GetByIdAsync(id);
+
+            if (existingCategory == null) { return NotFound(); }
+
+            // Domain to DTO
+            var response = new CategoryDto
+            {
+                Id = existingCategory.Id,
+                Name = existingCategory.Name,
+                UrlHandle = existingCategory.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
+        // PUT : https://localhost:7188/api/Categories/{id}
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> EditCategory(Guid id, UpdateCategoryRequestDto request)
+        {
+            // DTO to Domain
+            var category = new Category
+            {
+                Id = id,
+                Name = request.Name,
+                UrlHandle = request.UrlHandle
+            };
+
+            category = await categoryRepository.UpdateAsync(category);
+            if (category == null) { return NotFound(); }
+
+            // Domain to DTO
+            var response = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
+        // DELETE : https://localhost:7188/api/Categories/{id}
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteCategory(Guid id)
+        {
+            var category = await categoryRepository.DeleteAsync(id);
+            if (category == null) { return NotFound(); };
+
+            // convert Domain to DTO
+            var response = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
 
             return Ok(response);
         }

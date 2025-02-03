@@ -29,5 +29,32 @@ namespace backend.Repositories.Implementation
 
             return await categories.ToListAsync();
         }
+
+        public async Task<Category?> GetByIdAsync(Guid id)
+        {
+            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Category?> UpdateAsync(Category category)
+        {
+            var ctgr = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == category.Id);
+            if (ctgr == null) { return null; }
+
+            dbContext.Entry(ctgr).CurrentValues.SetValues(category); // dbContext.Entry(ctgr) - เข้าถึง entity entry ที่ EF Core ติดตามอยู่
+            await dbContext.SaveChangesAsync();
+            
+            return category;
+        }
+
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var ctgr = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (ctgr == null) { return null; }
+
+            dbContext.Categories.Remove(ctgr);
+            await dbContext.SaveChangesAsync();
+
+            return ctgr;
+        }
     }
 }
