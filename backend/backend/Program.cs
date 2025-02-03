@@ -1,4 +1,6 @@
 using backend.Data;
+using backend.Repositories.Implementation;
+using backend.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlogAppConnectionString"));
 });
+
+// need to write this after created implementation and interface
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // add dependency injection and create new instance in every HTTP request
 
 var app = builder.Build();
 
