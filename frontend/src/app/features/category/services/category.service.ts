@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddCategoryRequest, Category } from '../models/category.model';
+import { AddCategoryRequest, Category, EditCategoryRequest } from '../models/category.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -29,5 +29,13 @@ export class CategoryService {
 
   deleteCategory(id: string): Observable<Category>{
     return this.http.delete<Category>(`${environment.apiBaseUrl}/api/Categories/${id}`);
+  }
+
+  editCategory(id: string, model: EditCategoryRequest): Observable<Category> {
+    return this.http.put<Category>(`${environment.apiBaseUrl}/api/Categories/${id}`, model);
+  }
+
+  getCategoryById(id: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.apiBaseUrl}/api/Categories/${id}`);
   }
 }

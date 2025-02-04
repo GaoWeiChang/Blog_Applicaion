@@ -26,11 +26,11 @@ export class CategoryListComponent implements OnInit {
   onDelete(id: string): void{
     if (id) {
       this.categoryService.deleteCategory(id)
-          .subscribe({
-            next: (response) => {
-              window.location.reload();
-            }
-          });
+        .subscribe({
+          next: (response) => {
+            window.location.reload();
+          }
+        });
     }
   }
 }

@@ -26,7 +26,7 @@
                     <td>{{category.name}}</td>
                     <td>{{category.urlHandle}}</td>
                     <td class="text-center">
-                        <button class="btn btn-info me-2">
+                        <button class="btn btn-info me-2" [routerLink]="['/admin/categories', category.id]">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button class="btn btn-danger" (click)="onDelete(category.id)">
