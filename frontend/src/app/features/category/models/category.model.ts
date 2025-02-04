@@ -3,3 +3,8 @@ export interface Category{
     name: string,
     urlHandle: string
 };
+
+export interface AddCategoryRequest{
+    name: string;
+    urlHandle: string;
+};

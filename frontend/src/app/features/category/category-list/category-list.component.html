@@ -4,13 +4,12 @@
     <div class="d-flex justify-content-between mt-3">
         <div class="d-flex">
             <input type="text" class="form-control" #queryText>
-            <button type="button" class="btn btn-warning ms-1">Search</button>
+            <button type="button" class="btn btn-warning ms-1" (click)="onSearch(queryText.value)"><mat-icon>search</mat-icon></button>
         </div>
-
-        <a class="btn btn-primary">Add Category</a>
+        <a [routerLink]="['/admin/categories/add']" class="btn btn-primary">Add Category</a>
     </div>
 
-    <ng-container *ngIf="categories$ | async as categories">
+    <ng-container *ngIf="categories$ | async as categories; else loader">
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -26,12 +25,24 @@
                     <td>{{category.id}}</td>
                     <td>{{category.name}}</td>
                     <td>{{category.urlHandle}}</td>
-                    <td>
-                        <a class="btn btn-info me-2">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
+                    <td class="text-center">
+                        <button class="btn btn-info me-2">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button class="btn btn-danger" (click)="onDelete(category.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </ng-container>
+
+    <ng-template #loader>
+        <div class="text-center mt-3">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
 </div>

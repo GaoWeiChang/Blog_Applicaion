@@ -9,7 +9,6 @@ import { CategoryService } from '../services/category.service';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-
   categories$?: Observable<Category[]>;
 
   constructor(private categoryService: CategoryService) {
@@ -17,7 +16,21 @@ export class CategoryListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getAllCategories();
+    this.categories$ = this.categoryService.getAllCategories(undefined);
   }
 
+  onSearch(query: string): void {
+    this.categories$ = this.categoryService.getAllCategories(query);
+  }
+
+  onDelete(id: string): void{
+    if (id) {
+      this.categoryService.deleteCategory(id)
+          .subscribe({
+            next: (response) => {
+              window.location.reload();
+            }
+          });
+    }
+  }
 }
