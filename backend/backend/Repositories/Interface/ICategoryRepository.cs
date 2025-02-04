@@ -8,7 +8,7 @@ namespace backend.Repositories.Interface
         Task<Category> CreateAsync(Category category);
 
         // get all data from the database
-        Task<IEnumerable<Category>> GetAllAsync();
+        Task<IEnumerable<Category>> GetAllAsync(string? query=null);
 
         // get data by Guid
         Task<Category> GetByIdAsync(Guid id);

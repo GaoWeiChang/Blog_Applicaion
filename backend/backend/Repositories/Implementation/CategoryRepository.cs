@@ -22,10 +22,16 @@ namespace backend.Repositories.Implementation
             return category;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync(string? query=null)
         {
             // Query 
             var categories = dbContext.Categories.AsQueryable(); // allow to chain LINQ queries
+
+            // Filtering
+            if (string.IsNullOrWhiteSpace(query) == false)
+            {
+                categories = categories.Where(x => x.Name.Contains(query));
+            }
 
             return await categories.ToListAsync();
         }
