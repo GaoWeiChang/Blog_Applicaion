@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // need to write this after created implementation and interface
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // add dependency injection and create new instance in every HTTP request
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 var app = builder.Build();
 

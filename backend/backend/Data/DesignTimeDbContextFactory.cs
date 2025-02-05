@@ -14,7 +14,7 @@ namespace backend.Data
 
             var builder = new DbContextOptionsBuilder();
             builder.UseSqlServer("Server=DESKTOP-MR5OABM\\SQLEXPRESS; Database=BlogAppDb; TrustServerCertificate=True; Trusted_Connection=True;");
-
+            
             return new ApplicationDbContext(builder.Options);
         }
     }

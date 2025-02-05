@@ -11,7 +11,7 @@ namespace backend.Repositories.Interface
         Task<IEnumerable<Category>> GetAllAsync(string? query=null);
 
         // get data by Guid
-        Task<Category> GetByIdAsync(Guid id);
+        Task<Category?> GetByIdAsync(Guid id);
 
         // update data
         Task<Category?> UpdateAsync(Category category);
