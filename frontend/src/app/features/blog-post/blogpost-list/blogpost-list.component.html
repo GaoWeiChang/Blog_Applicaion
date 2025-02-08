@@ -1,0 +1,44 @@
+<div class="container">
+    <h1 class="mt-3">BlogPost List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-primary mb-4">Add BlogPost</button>
+    </div>
+
+    <ng-container *ngIf="blogPosts$ | async as blogPosts">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Short Description</th>
+                    <th>Visible</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <tr *ngFor="let blogpost of blogPosts">
+                    <td>{{blogpost.title}}</td>
+                    <td>{{blogpost.shortDescription}}</td>
+                    <td>{{blogpost.isVisible}}</td>
+                    <td>
+                        <span *ngFor="let category of blogpost.categories">
+                            <span class="badge text-bg-secondary me-2">{{category.name}}</span>
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-info me-2">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+
+                        <button class="btn btn-danger">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</div>
