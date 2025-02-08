@@ -2,6 +2,7 @@ using backend.Data;
 using backend.Repositories.Implementation;
 using backend.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,12 @@ app.UseCors(options =>
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")), // indicated "Images" folder
+    RequestPath = "/Images"
+});
 
 app.MapControllers();
 
