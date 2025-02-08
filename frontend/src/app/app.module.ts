@@ -13,7 +13,8 @@ import { BlogpostListComponent } from './features/blog-post/blogpost-list/blogpo
 import { AddBlogpostComponent } from './features/blog-post/add-blogpost/add-blogpost.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './features/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ImageSelectorComponent } from './shared/components/image-selector/image-selector.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ConfirmDialogComponent } from './features/confirm-dialog/confirm-dialog
     EditCategoryComponent,
     BlogpostListComponent,
     AddBlogpostComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ImageSelectorComponent
   ],
   imports: [
     BrowserModule,

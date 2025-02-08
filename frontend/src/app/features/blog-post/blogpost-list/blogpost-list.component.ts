@@ -3,7 +3,7 @@ import { Observable, Subscribable, Subscription } from 'rxjs';
 import { BlogPost } from '../models/blogpost.model';
 import { BlogpostsService } from '../services/blogposts.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -12,13 +12,13 @@ import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.comp
   styleUrls: ['./blogpost-list.component.css']
 })
 export class BlogpostListComponent implements OnInit, OnDestroy {
-  blogPosts$? : Observable<BlogPost[]>
-  
+  blogPosts$?: Observable<BlogPost[]>
+
   deleteBlogPostSubscription?: Subscription;
 
-  constructor(private blogPostService : BlogpostsService,
-              private dialog: MatDialog
-  ){}
+  constructor(private blogPostService: BlogpostsService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.blogPosts$ = this.blogPostService.getAllBlogPost();
@@ -30,13 +30,13 @@ export class BlogpostListComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         this.deleteBlogPostSubscription = this.blogPostService.deleteBlogPost(id)
-                                              .subscribe({
-                                                next: (response) => {
-                                                  window.location.reload();
-                                                }
-                                              });
+          .subscribe({
+            next: (response) => {
+              window.location.reload();
+            }
+          });
       }
     });
   }

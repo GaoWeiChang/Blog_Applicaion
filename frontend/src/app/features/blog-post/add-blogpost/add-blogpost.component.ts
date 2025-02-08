@@ -6,6 +6,8 @@ import { Observable, Subscribable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageSelectorComponent } from 'src/app/shared/components/image-selector/image-selector.component';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -13,15 +15,17 @@ import { CategoryService } from '../../category/services/category.service';
   styleUrls: ['./add-blogpost.component.css']
 })
 
-export class AddBlogpostComponent implements OnInit, OnDestroy{
+export class AddBlogpostComponent implements OnInit, OnDestroy {
   model: AddBlogPost;
   categories$?: Observable<Category[]>;
 
   private addBlogPostSubscription?: Subscription;
 
   constructor(private blogPostService: BlogpostsService,
-              private categoryService: CategoryService,
-              private router: Router) {
+    private categoryService: CategoryService,
+    private router: Router,
+    private dialog: MatDialog)
+  {
     this.model = {
       title: '',
       shortDescription: '',
@@ -42,11 +46,20 @@ export class AddBlogpostComponent implements OnInit, OnDestroy{
   onSubmit(): void {
     console.log(this.model);
     this.addBlogPostSubscription = this.blogPostService.addBlogPost(this.model)
-                                    .subscribe({
-                                      next: (response) => {
-                                        this.router.navigateByUrl('/admin/blogposts');
-                                      }
-                                    })
+      .subscribe({
+        next: (response) => {
+          this.router.navigateByUrl('/admin/blogposts');
+        }
+      })
+  }
+
+  openImageSelector(): void {
+    const dialogRef = this.dialog.open(ImageSelectorComponent, {
+        width: '60%', // or 'px'
+        height: '55%',
+        maxWidth: '1200px',
+        maxHeight: '800px'
+      });
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Category } from '../models/category.model';
 import { CategoryService } from '../services/category.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-category-list',
@@ -11,10 +13,12 @@ import { CategoryService } from '../services/category.service';
 export class CategoryListComponent implements OnInit {
   categories$?: Observable<Category[]>;
 
-  constructor(private categoryService: CategoryService) {
-    
-  }
-  
+  deleteBlogPostSubscription?: Subscription;
+
+  constructor(private categoryService: CategoryService,
+    private dialog: MatDialog
+  ) { }
+
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories(undefined);
   }
@@ -23,14 +27,20 @@ export class CategoryListComponent implements OnInit {
     this.categories$ = this.categoryService.getAllCategories(query);
   }
 
-  onDelete(id: string): void{
-    if (id) {
-      this.categoryService.deleteCategory(id)
-        .subscribe({
-          next: (response) => {
-            window.location.reload();
-          }
-        });
-    }
+  onDelete(id: string): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: 'Are you sure you want to delete this post?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteBlogPostSubscription = this.categoryService.deleteCategory(id)
+          .subscribe({
+            next: (response) => {
+              window.location.reload();
+            }
+          });
+      }
+    });
   }
 }
