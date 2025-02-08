@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BlogPost } from '../models/blogpost.model';
+import { AddBlogPost, BlogPost } from '../models/blogpost.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,5 +13,9 @@ export class BlogpostsService {
 
   getAllBlogPost(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${environment.apiBaseUrl}/api/blogposts`);
+  }
+
+  addBlogPost(model: AddBlogPost): Observable<BlogPost> {
+    return this.http.post<BlogPost>(`${environment.apiBaseUrl}/api/blogposts`, model)
   }
 }
