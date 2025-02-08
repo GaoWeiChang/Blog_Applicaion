@@ -16,6 +16,10 @@ export class BlogpostsService {
   }
 
   addBlogPost(model: AddBlogPost): Observable<BlogPost> {
-    return this.http.post<BlogPost>(`${environment.apiBaseUrl}/api/blogposts`, model)
+    return this.http.post<BlogPost>(`${environment.apiBaseUrl}/api/blogposts`, model);
+  }
+
+  deleteBlogPost(id: string): Observable<BlogPost> {
+    return this.http.delete<BlogPost>(`${environment.apiBaseUrl}/api/blogposts/${id}`);
   }
 }

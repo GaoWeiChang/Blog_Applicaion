@@ -12,6 +12,8 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { BlogpostListComponent } from './features/blog-post/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './features/blog-post/add-blogpost/add-blogpost.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './features/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { MarkdownModule } from 'ngx-markdown';
     AddCategoryComponent,
     EditCategoryComponent,
     BlogpostListComponent,
-    AddBlogpostComponent
+    AddBlogpostComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { MarkdownModule } from 'ngx-markdown';
     FormsModule,  // allow to capture user input from form fields
     HttpClientModule, // allow communicate with backend and CURD operation
     MatIconModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
