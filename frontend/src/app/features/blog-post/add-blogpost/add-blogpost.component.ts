@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageSelectorComponent } from 'src/app/shared/components/image-selector/image-selector.component';
+import { ImageService } from 'src/app/shared/components/image-selector/services/image.service';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -20,11 +21,13 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   categories$?: Observable<Category[]>;
 
   private addBlogPostSubscription?: Subscription;
+  imageSelectorSubscription?: Subscription;
 
   constructor(private blogPostService: BlogpostsService,
-    private categoryService: CategoryService,
-    private router: Router,
-    private dialog: MatDialog)
+              private categoryService: CategoryService,
+              private router: Router,
+              private dialog: MatDialog,
+              private imageService: ImageService)
   {
     this.model = {
       title: '',
@@ -41,6 +44,14 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
+    this.imageSelectorSubscription = this.imageService.onSelectImage()
+    .subscribe({
+      next: (response) => {
+        if(this.model){
+          this.model.featuredImageUrl = response.url;
+        }
+      } 
+    });
   }
 
   onSubmit(): void {
@@ -58,12 +69,13 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
         width: '60%', // or 'px'
         height: '55%',
         maxWidth: '1200px',
-        maxHeight: '800px'
+        maxHeight: '900px'
       });
   }
 
   ngOnDestroy(): void {
     this.addBlogPostSubscription?.unsubscribe();
+    this.imageSelectorSubscription?.unsubscribe();
   }
 }
 
