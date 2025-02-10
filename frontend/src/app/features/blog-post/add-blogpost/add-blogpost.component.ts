@@ -50,7 +50,7 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
         if(this.model){
           this.model.featuredImageUrl = response.url;
         }
-      } 
+      }
     });
   }
 

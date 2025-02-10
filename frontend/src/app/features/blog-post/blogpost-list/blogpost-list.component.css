@@ -1,5 +1,12 @@
-mat-icon {
-    display: flex;
+.btn mat-icon {
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+/* Optional: if you want to adjust button padding */
+.btn {
+    padding: 6px 12px;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
 }
