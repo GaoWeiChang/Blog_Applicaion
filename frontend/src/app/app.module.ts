@@ -17,6 +17,7 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { ImageSelectorComponent } from './shared/components/image-selector/image-selector.component';
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
 import { HomeComponent } from './features/public/home/home.component';
+import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomeComponent } from './features/public/home/home.component';
     ConfirmDialogComponent,
     ImageSelectorComponent,
     EditBlogpostComponent,
-    HomeComponent
+    HomeComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,

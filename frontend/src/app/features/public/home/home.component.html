@@ -11,7 +11,7 @@
                                 {{blog.shortDescription}}
                             </p>
                             <p class="d-flex align-items-end" style="flex: 1;">
-                                <button class="btn btn-primary">Read More</button>
+                                <button class="btn btn-primary" [routerLink]="['/blog', blog.urlHandle]">Read More</button>
                             </p>
                         </div>
                     </div>
