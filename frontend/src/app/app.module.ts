@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ImageSelectorComponent } from './shared/components/image-selector/image-selector.component';
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
+import { HomeComponent } from './features/public/home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-b
     AddBlogpostComponent,
     ConfirmDialogComponent,
     ImageSelectorComponent,
-    EditBlogpostComponent
+    EditBlogpostComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
