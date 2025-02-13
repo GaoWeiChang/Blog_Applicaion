@@ -18,6 +18,8 @@ import { ImageSelectorComponent } from './shared/components/image-selector/image
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/blog-post/auth/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { BlogDetailsComponent } from './features/public/blog-details/blog-detail
     ImageSelectorComponent,
     EditBlogpostComponent,
     HomeComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { BlogDetailsComponent } from './features/public/blog-details/blog-detail
     MarkdownModule.forRoot(),
     MatDialogModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

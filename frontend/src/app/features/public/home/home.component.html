@@ -1,7 +1,7 @@
 <div class="container">
     <div class="my-5">
         <div class="row align-items-stretch">
-            <ng-container *ngIf="blogposts$ | async as blogs">
+            <ng-container *ngIf="blogposts$ | async as blogs; else loader">
                 <div class="col-12 col-md-4 mb-3" *ngFor="let blog of blogs">
                     <div class="card h-100">
                         <img [src]="blog.featuredImageUrl" class="card-img-top" [alt]="blog.title">
@@ -19,4 +19,11 @@
             </ng-container>
         </div>
     </div>
+    <ng-template #loader>
+        <div class="text-center mt-3">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
 </div>
