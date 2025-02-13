@@ -9,10 +9,27 @@ import { AuthService } from 'src/app/features/blog-post/auth/services/auth.servi
   styleUrls: ['./navbar.component.css']
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   user?: User;
   constructor(private authService: AuthService,
     private router: Router) {
   }
+
+  ngOnInit(): void {
+    this.authService.user()
+      .subscribe({
+        next: (response) => {
+          this.user = response
+        }
+      })
+
+      // when web refreshed, make sure user still log in
+      this.user = this.authService.getUser();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
+  }  
 }
