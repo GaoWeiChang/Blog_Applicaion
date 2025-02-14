@@ -20,6 +20,7 @@ import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/blog-post/auth/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { RegisterComponent } from './features/blog-post/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CookieService } from 'ngx-cookie-service';
     HomeComponent,
     BlogDetailsComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

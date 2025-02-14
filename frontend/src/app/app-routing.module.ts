@@ -10,6 +10,7 @@ import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-b
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/blog-post/auth/login/login.component';
+import { RegisterComponent } from './features/blog-post/auth/register/register.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'blog/:url',
