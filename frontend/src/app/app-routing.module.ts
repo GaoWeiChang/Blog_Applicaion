@@ -11,7 +11,7 @@ import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/blog-post/auth/login/login.component';
 import { RegisterComponent } from './features/blog-post/auth/register/register.component';
-
+import { authGuard } from './features/blog-post/auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -32,27 +32,33 @@ const routes: Routes = [
   },
   {
     path: 'admin/categories',
-    component: CategoryListComponent
+    component: CategoryListComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin/categories/add',
-    component: AddCategoryComponent
+    component: AddCategoryComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin/categories/:id',
-    component: EditCategoryComponent
+    component: EditCategoryComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin/blogposts',
-    component: BlogpostListComponent
+    component: BlogpostListComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin/blogposts/add',
-    component: AddBlogpostComponent
+    component: AddBlogpostComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin/blogposts/:id',
-    component: EditBlogpostComponent
+    component: EditBlogpostComponent,
+    canActivate: [authGuard]
   }
 ];
 
